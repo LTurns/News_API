@@ -25,7 +25,6 @@ toBeAnInstanceOf: (value) => {
   }
 },
 
-
 toInclude: (value) => {
   if(exp.includes(value)){
     console.log('     pass')
@@ -52,3 +51,33 @@ toHaveStatusCode: (value) => {
 })
 
 const expect = (exp) => matchers(exp)
+
+
+
+
+const it = (msg, fn) => describe('  ' + msg, fn)
+
+const matchers = (exp) => ({
+  toBe: (value) => {
+    if (exp === value) {
+      console.log('     pass')
+    } else {
+      console.log('     fail')
+    }
+  },
+
+  toBeAnInstanceOf: (value) => {
+    if(exp.constructor === value){
+      console.log('     pass')
+    }else{
+      console.log('     fail')
+    }
+  },
+
+  toInclude: (value) => {
+    if(exp.includes(value)){
+      console.log('     pass')
+    }else{
+      console.log('     fail')
+    }
+  },

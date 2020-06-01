@@ -3,30 +3,50 @@
   <head>
     <meta charset="utf-8">
     <title>News Application</title>
+    <link rel="icon" href="data:;base64,=">
   </head>
-  <body>
+  <body onload="">
     <center>
     <header><h1>The Daily News</h1>
     <em><h4>As told by the Guardian </h4><em>
       </header>
-      <httpProtocol>
-  <customHeaders>
-    <add name="Access-Control-Allow-Origin" value="*" />
-    <add name="Access-Control-Allow-Headers" value="Content-Type" />
-    <add name="Access-Control-Allow-Methods" value="GET, POST, PUT, DELETE, OPTIONS" />
-  </customHeaders>
-</httpProtocol>
+      <div id="container">
+     <h1 id='headline'>Headline</h1>
+      </div>
+      <div id="image">
+      Image
+
+      </div>
+      <script>
+
+      var request = new XMLHttpRequest();
+      var newsStory;
+
+      request.open("GET",
+      "http://news-summary-api.herokuapp.com/guardian?apiRequestUrl=http://content.guardianapis.com/politics/blog/2014/feb/17/alex-salmond-speech-first-minister-scottish-independence-eu-currency-live?show-fields=body", true);
+      request.send();
+
+      request.onload = () => {
+       console.log(request);
+       if(request.status === 200){
+         console.log(JSON.parse(request.response));
+
+         headlineObject = JSON.parse(request.responseText);
+
+         let headline = document.createElement('h2');
+         headline = headline.webTitle;
+
+
+         document.getElementById('headline').innerHTML = story.viewOne(headline);
+         document.getElementById('image').innerHTML = story.viewAll();
+       } else {
+         console.log(`error ${request.status} ${request.statusText}`);
+       }
+     };
+      </script>
+      <script type="text/javascript" src="src/news.js"></script>
+      <script type="text/javascript" src="src/interface.js"></script>
+      <script type="text/javascript" src="src/server.js"></script>
           </center>
-          <script>
-
-   var request = new XMLHttpRequest()
-   request.open('GET', 'https://www.theguardian.com/uk', true)
-
-   request.onload = function(){
-     console.log(request.responseText);
-   }
-   request.send();
-
-          </script>
           </body>
 </html>
