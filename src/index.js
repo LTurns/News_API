@@ -1,7 +1,5 @@
-
-
 window.onload = function(){
-  fetch('http://news-summary-api.herokuapp.com/guardian?apiRequestUrl=http://content.guardianapis.com/search?from-date=2020-06-02')
+  fetch(`http://news-summary-api.herokuapp.com/guardian?apiRequestUrl=http://content.guardianapis.com/search?from-date=${new Date().toISOString().slice(0,10)}`)
     .then(function(response){
        return response.json()})
        // this was the first step I did. Here  we simply fetch the API and check that it is returning something by looking into the
